@@ -29,7 +29,11 @@ public class UserRestController {
 		UserEntity userEntity = userBO.getUserEntityByLoginId(loginId);
 		result.put("code", 1);
 		
+		if (userEntity != null) {
+			result.put("isDuplicatedId", true);
+		}
 		
+		return result;
 	}
 	
 }

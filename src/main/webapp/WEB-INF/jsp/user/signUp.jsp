@@ -46,8 +46,13 @@
 </div>
 
 <script>
+	
 	$(document).ready(function() {
+		// 중복확인 버튼 클릭
 		$('#loginIdCheckBtn').on('click', function() {
+			//alert("클릭");
+			
+			//경고 문구 초기화
 			
 			$('#idCheckLength').addClass('d-none');
 			$('#idCheckDuplicated').addClass('d-none');
@@ -58,25 +63,68 @@
 				$('#idCheckLength').removeClass('d-none');
 				return;
 			}
-		});
-		
-		$.ajax({
 			
-			url:"/user/is_duplicated_id"
-			, data: {"loginId":loginId}
-			
-			, success: function(data) {
-				if (data.isDuplicatedId) {
-					$('#idCheckDuplicated').removeClass('d-none');
-				} else {
-					$('#idCheckOk').removeClass('d-none');
+			// AJAX 통신 - 중복확인
+			$.ajax({
+				// request
+				url:"/user/is_duplicated_id"
+				, data: {"loginId":loginId}
+				
+				// response
+				, success: function(data) {
+					if (data.isDuplicatedId) {
+						// 중복
+						$('#idCheckDuplicated').removeClass('d-none');
+					} else {
+						// 중복 아님 => 사용 가능
+						$('#idCheckOk').removeClass('d-none');
+					}
 				}
-			}
-			, error: function(request, status, error) {
-				alert("중복확인에 실패했습니다.");
-			}
-		
-			
+				, error: function(request, status, error) {
+					alert("중복확인에 실패했습니다.");
+				}
+			});
 		});
+		
+		// 회원가입
+		$("#signUpForm").on('submit', function(e){
+			e.preventDefault();
+			
+			let loginId = $('input[name=loginId]').val().trim();
+			let password = $("#password").val();
+			let confirmPassword = $('#confirmPassword').val();
+			let name = $('#name').val().trim();
+			let email = $('#email').val().trim();
+			
+			if (!loginId) {
+				alert("아이디를 입력하세요");
+				return false;
+			}
+			
+			if (!password || !confirmPassword) {
+				alert("비밀번호를 입력하세요");
+				return false;
+			}
+			
+			if (password != confirmPassword) {
+				alert("비밀번호가 일치하지 않습니다.");
+			}
+			
+			if (!name) {
+				alert("이름을 입력하세요");
+				return false;
+			}
+			
+			if (!email) {
+				alert("이메을일 입력하세요");
+				return false;
+			}
+			
+			if($('#idCheckOk').hasClass('d-none')) {
+				alert("아이디 중복확인을 다시 해주세요");
+				return false;
+			}
+		});
+		
 	});
 </script>
