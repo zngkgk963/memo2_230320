@@ -18,5 +18,18 @@ public class UserBO {
 		return userRepository.findByLoginId(loginId);
 	}
 	
-	
+	// input: user 관련 파라미터들
+	// output: UserEntity => id pk 추출
+	public Integer addUser(String loginId, String password, String name, String email) {
+		// save
+		UserEntity userEntity = userRepository.save(
+					UserEntity.builder()
+					.loginId(loginId)
+					.password(password)
+					.name(name)
+					.email(email)
+					.build()
+				);
+		return userEntity == null ? null : userEntity.getId(); // pk만 리턴
+	}
 }

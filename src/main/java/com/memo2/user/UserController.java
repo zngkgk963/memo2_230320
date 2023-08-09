@@ -10,10 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 	
 	@GetMapping("/sign_up_view")
-	public String signUPView(Model model) {
+	public String signUpView(Model model) {
 		model.addAttribute("view", "user/signUp");
 		return "template/layout";
 	}
 	
-	
+	@GetMapping("/sign_in_view")
+	public String signInView(Model model) {
+		model.addAttribute("view", "user/signIn");
+		return "template/layout";
+	}
 }
