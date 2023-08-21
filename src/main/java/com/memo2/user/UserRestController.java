@@ -62,4 +62,8 @@ public class UserRestController {
 		return result;
 	}
 	
+	@PostMapping("/sing_in")
+	public Map<String, Object> signIn(
+			@RequestParam("loginId") )
+	
 }
