@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class StoreDAO {
+public interface StoreDAO {
 	
 	public List<Store> selectStoreList();
 }

@@ -17,5 +17,6 @@ public class Lesson02Quiz01Controller {
 	@ResponseBody
 	public List<Store> quiz01() {
 		List<Store> storeList = storeBO.getStoreList();
+		return storeList;
 	}
 }
