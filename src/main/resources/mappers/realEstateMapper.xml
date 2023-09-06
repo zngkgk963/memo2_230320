@@ -19,4 +19,23 @@
 		WHERE
 			`id` = #{id}
  	</select>
+ 	
+ 	<select id="selectRealEstateByRentPrice" resultType="com.memo2.lesson03.RealEstate">
+ 		SELECT
+ 			`id`
+			, `realtorId`
+			, `address`
+			, `area`
+			, `type`
+			, `price`
+			, `rentPrice`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`real_estate`
+		WHERE
+		<![CDATA[
+			`rentPrice` < #{rentPrice}
+		]]>
+ 	</select>
  </mapper>

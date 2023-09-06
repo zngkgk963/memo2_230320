@@ -16,7 +16,7 @@ public class Lesson03Quiz01Controller {
 	public RealEstate quiz01_1(
 			@RequestParam(value="id", defaultValue="1") int id) {
 		System.out.println("### id : " + id);
-		return realEstateBO.getRealEstate(id);
+		return realEstateBO.getRealEstateById(id);
 	}
 	
 	@RequestMapping("/2")
